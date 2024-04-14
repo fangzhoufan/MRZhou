@@ -7,7 +7,9 @@
 get_f(dat, F_value = 10)
 }
 \arguments{
-\item{F_value}{}
+\item{dat}{the exposure or harmonization between exposure and outcome}
+
+\item{F_value}{the F statistic = 10}
 }
 \value{
 Calculate the F statistic for the exposure IVs (F>10)
