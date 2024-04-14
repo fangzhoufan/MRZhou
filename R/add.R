@@ -1,4 +1,3 @@
-
 #' Returns the sum of two numbers
 #'
 #' @param a Number one.

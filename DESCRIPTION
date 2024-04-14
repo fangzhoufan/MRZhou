@@ -1,12 +1,12 @@
 Package: MRZhou
-Title: What the Package Does (One Line, Title Case)
+Title: MR analysis package by FFZ
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Fangzhou",
            family = "Fan",
            role = c("aut", "cre"),
-           email = "swsoyee@gmail.com")
-Description: A useful Mendelian randomizationanalysis packages .
+           email = "haohaojiu@outlook.com")
+Description: A useful Mendelian randomization analysis packages .
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
