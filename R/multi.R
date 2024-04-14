@@ -1,4 +1,3 @@
-
 #' Returns the sum of two numbers
 #'
 #' @param a Number one.
@@ -9,7 +8,7 @@
 #'
 #' @examples
 #' library(MRZhou)
-#' add(1, 2)
-add <- function(a, b) {
-  a + b
+#' multi(1, 2)
+multi <- function(a, b) {
+  a * b
 }
