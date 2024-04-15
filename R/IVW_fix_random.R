@@ -1,6 +1,6 @@
 #' Return the main four MR results
 #'
-#' @param dat harmonization(using the function of harmonise_data) note:the SNP>=3
+#' @param dat harmonization(using the function of harmonise_data)
 #' @param plot the choice of showing the MR results visualization
 #'
 #' @return

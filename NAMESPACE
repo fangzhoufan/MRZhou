@@ -3,6 +3,7 @@
 export(IVW_fix_random)
 export(MRpresso)
 export(calculate_LD)
+export(forest_plot)
 export(get_f)
 export(get_rsID_from_chrpos)
 export(mr_test)

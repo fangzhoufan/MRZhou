@@ -7,7 +7,7 @@
 IVW_fix_random(dat, plot = FALSE)
 }
 \arguments{
-\item{dat}{harmonization(using the function of harmonise_data) note:the SNP>=3}
+\item{dat}{harmonization(using the function of harmonise_data)}
 
 \item{plot}{the choice of showing the MR results visualization}
 }
