@@ -16,7 +16,7 @@ read_finngen_outcome(exp, trait, filepath, samplesize)
 \item{samplesize}{the outcome samplesize}
 }
 \value{
-finngen outcome
+a dataframe of finngen outcome
 }
 \description{
 Return outcome when using the finngen database

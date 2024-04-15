@@ -5,7 +5,7 @@
 #' @param filepath the outcome original file path
 #' @param samplesize the outcome samplesize
 #'
-#' @return finngen outcome
+#' @return a dataframe of finngen outcome
 #' @export
 #'
 #' @examples
