@@ -2,7 +2,11 @@
 
 export(IVW_fix_random)
 export(MRpresso)
+export(calculate_LD)
 export(get_f)
+export(get_rsID_from_chrpos)
 export(mr_test)
 export(read_finngen_exposure)
 export(read_finngen_outcome)
+export(snp_add_eaf)
+export(snp_phenoscanner)

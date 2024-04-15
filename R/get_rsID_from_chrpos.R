@@ -5,9 +5,8 @@
 
 #' How to get rsID from chromosome and position
 #'
-#' @param dat the dataframe of eposure or outcome
-#' @param col_chr chromosome
-The default is "chr_col".
+#' @param dat the dataframe of exposure or outcome
+#' @param col_chr chromosome the default is "chr_col".
 #' @param col_pos chromosome position
 #' @param col_ref_allele Name of column with non effect allele. Must contain only the characters "A", "C", "T" or "G". The default is "refAllele".
 #' @param col_alt_allele Name of column with effect allele. Must contain only the characters "A", "C", "T" or "G". The default is "altAllele"
