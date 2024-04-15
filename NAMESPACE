@@ -2,5 +2,6 @@
 
 export(MRpresso)
 export(get_f)
+export(mr_test)
 export(read_finngen_exposure)
 export(read_finngen_outcome)

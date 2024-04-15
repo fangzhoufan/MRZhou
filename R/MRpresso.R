@@ -10,14 +10,16 @@
 #' @examples
 MRpresso <- function(dat) {
   # 创建一个空的结果数据框
-  results <- data.frame(Exposure = character(),
-                        Outcome = character(),
-                        MR.presso.global.RSSobs = character(),
-                        MR.presso.global.pvalue = character(),
-                        b.MR.presso = numeric(),
-                        se.MR.presso = numeric(),
-                        pval.MR.presso = numeric(),
-                        stringsAsFactors = FALSE)
+  results <- data.frame(
+    Exposure = character(),
+    Outcome = character(),
+    MR.presso.global.RSSobs = character(),
+    MR.presso.global.pvalue = character(),
+    b.MR.presso = numeric(),
+    se.MR.presso = numeric(),
+    pval.MR.presso = numeric(),
+    stringsAsFactors = FALSE
+  )
 
   # 循环处理每一对曝露和结果
   for (i in 1:length(unique(dat$exposure))) {
@@ -28,12 +30,15 @@ MRpresso <- function(dat) {
       dat1 <- dat[(dat$exposure == strings1 & dat$outcome == strings2), ]
 
       # 尝试运行 MR-PRESSO 分析
-      res_presso <- tryCatch({
-        TwoSampleMR::run_mr_presso(dat1)
-      }, error = function(e) {
-        print(paste0(strings1, ' to ', strings2, ' Not found'))
-        NA
-      })
+      res_presso <- tryCatch(
+        {
+          TwoSampleMR::run_mr_presso(dat1)
+        },
+        error = function(e) {
+          print(paste0(strings1, " to ", strings2, " Not found"))
+          NA
+        }
+      )
 
       # 处理 MR-PRESSO 结果
       if (!is.na(res_presso)) {
@@ -52,14 +57,16 @@ MRpresso <- function(dat) {
       }
 
       # 创建包含结果的数据框
-      result <- data.frame(Exposure = strings1,
-                           Outcome = strings2,
-                           MR.presso.global.RSSobs = Presso.RSSobs,
-                           MR.presso.global.pvalue = Presso.Pvalue,
-                           b.MR.presso = b.MR.presso,
-                           se.MR.presso = se.MR.presso,
-                           pval.MR.presso = pval.MR.presso,
-                           stringsAsFactors = FALSE)
+      result <- data.frame(
+        Exposure = strings1,
+        Outcome = strings2,
+        MR.presso.global.RSSobs = Presso.RSSobs,
+        MR.presso.global.pvalue = Presso.Pvalue,
+        b.MR.presso = b.MR.presso,
+        se.MR.presso = se.MR.presso,
+        pval.MR.presso = pval.MR.presso,
+        stringsAsFactors = FALSE
+      )
 
       # 将结果追加到结果数据框中
       results <- rbind(results, result)
