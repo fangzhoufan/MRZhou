@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-finngen_exposure_data <- function(trait, filepath, samplesize, p_threshold = 5e-8) {
+read_finngen_exposure <- function(trait, filepath, samplesize, p_threshold = 5e-8) {
   ## 读取数据
   expo_rt <- read.csv(filepath, header = TRUE)
 
