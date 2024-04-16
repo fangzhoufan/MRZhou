@@ -4,7 +4,11 @@
 \alias{IVW_fix_random}
 \title{Return the main four MR results}
 \usage{
-IVW_fix_random(dat, plot = FALSE)
+IVW_fix_random(
+  dat,
+  other_method = c("mr_egger_regression", "mr_weighted_median", "mr_raps"),
+  plot = FALSE
+)
 }
 \arguments{
 \item{dat}{harmonization(using the function of harmonise_data)}

@@ -11,13 +11,13 @@
 MRpresso <- function(dat) {
   # 创建一个空的结果数据框
   results <- data.frame(
-    Exposure = character(),
-    Outcome = character(),
+    exposure = character(),
+    outcome = character(),
     MR.presso.global.RSSobs = character(),
     MR.presso.global.pvalue = character(),
-    b.MR.presso = numeric(),
-    se.MR.presso = numeric(),
-    pval.MR.presso = numeric(),
+    b_MR.presso = numeric(),
+    se_MR.presso = numeric(),
+    pval_MR.presso = numeric(),
     stringsAsFactors = FALSE
   )
 
@@ -44,27 +44,27 @@ MRpresso <- function(dat) {
       if (!is.na(res_presso)) {
         Presso.Pvalue <- as.character(res_presso[[1]][["MR-PRESSO results"]][["Global Test"]][["Pvalue"]])
         Presso.RSSobs <- as.character(res_presso[[1]][["MR-PRESSO results"]][["Global Test"]][["RSSobs"]])
-        b.MR.presso <- res_presso[[1]][["Main MR results"]][["Causal Estimate"]][1]
-        se.MR.presso <- res_presso[[1]][["Main MR results"]][["Sd"]][1]
-        pval.MR.presso <- res_presso[[1]][["Main MR results"]][["P-value"]][1]
+        b_MR.presso <- res_presso[[1]][["Main MR results"]][["Causal Estimate"]][1]
+        se_MR.presso <- res_presso[[1]][["Main MR results"]][["Sd"]][1]
+        pval_MR.presso <- res_presso[[1]][["Main MR results"]][["P-value"]][1]
       } else {
         # 如果发生错误，将所有变量设置为NA或其他值
         Presso.Pvalue <- NA
         Presso.RSSobs <- NA
-        b.MR.presso <- NA
-        se.MR.presso <- NA
-        pval.MR.presso <- NA
+        b_MR.presso <- NA
+        se_MR.presso <- NA
+        pval_MR.presso <- NA
       }
 
       # 创建包含结果的数据框
       result <- data.frame(
-        Exposure = strings1,
-        Outcome = strings2,
+        exposure = strings1,
+        outcome = strings2,
         MR.presso.global.RSSobs = Presso.RSSobs,
         MR.presso.global.pvalue = Presso.Pvalue,
-        b.MR.presso = b.MR.presso,
-        se.MR.presso = se.MR.presso,
-        pval.MR.presso = pval.MR.presso,
+        b_MR.presso = b_MR.presso,
+        se_MR.presso = se_MR.presso,
+        pval_MR.presso = pval_MR.presso,
         stringsAsFactors = FALSE
       )
 
