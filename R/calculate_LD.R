@@ -7,15 +7,17 @@
 #' @export
 #'
 #' @examples
-calculate_LD <- function(dat, genome_build='grch37') {
+calculate_LD <- function(dat, genome_build = "grch37") {
   unique_exposures <- unique(dat$exposure)
   result_list <- list()
   for (exposure in unique_exposures) {
     snps_subset <- dat$SNP[dat$exposure == exposure]
-    result <- LDmatrix(snps = snps_subset,
-                       r2d = "r2",
-                       token = '57275ed3e372',
-                       genome_build = genome_build)
+    result <- LDmatrix(
+      snps = snps_subset,
+      r2d = "r2",
+      token = "57275ed3e372",
+      genome_build = genome_build
+    )
     result_df <- as.data.frame(result)
     colnames(result_df)[1] <- exposure
     result_list[[exposure]] <- result_df

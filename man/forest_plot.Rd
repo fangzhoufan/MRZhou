@@ -4,10 +4,26 @@
 \alias{forest_plot}
 \title{Return the forest plot}
 \usage{
-forest_plot(data, xlim = c(0, 4), ticks_at = c(0, 0.5, 1, 2, 3))
+forest_plot(
+  data,
+  abline = TRUE,
+  col_padj = FALSE,
+  p.adjust.methods = "bonferroni",
+  p.adjust.n = NULL,
+  xlim = c(0, 4),
+  ticks_at = c(0, 0.5, 1, 2, 3)
+)
 }
 \arguments{
 \item{data}{harmonization(using the function of harmonise_data)}
+
+\item{abline}{the abline of forest plot}
+
+\item{col_padj}{the forestplot figure of adjust_pval col}
+
+\item{p.adjust.methods}{p.adjust.methods,c("holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr", "none")}
+
+\item{p.adjust.n}{number of comparisons, must be at least length(p); only set this (to non-default) when you know what you are doing!}
 
 \item{xlim}{the forestploter packages param,xlim=c(0,4)}
 
