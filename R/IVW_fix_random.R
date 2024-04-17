@@ -74,7 +74,7 @@ IVW_fix_random <- function(dat, other_method = c(
 
             if (plot) {
               if (res$pval[res$method == "Inverse variance weighted"] < 0.05 / (exposure_length * exposure_length)) {
-                res_single <- mr_singlesnp(dat, all_method = c("_fe", "mr_egger_regression"))
+                res_single <- mr_singlesnp(dat, all_method = c("mr_ivw_fe", "mr_egger_regression"))
                 res_single$SNP[res_single$SNP == "All - Inverse variance weighted (fixed effects)"] <- "All - Inverse variance weighted"
                 p1 <- mr_scatter_plot(res, dat)
                 a1 <- p1[[1]] + ggsci::scale_color_lancet()
