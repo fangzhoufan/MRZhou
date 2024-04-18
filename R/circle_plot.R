@@ -37,7 +37,7 @@ circle_plot <- function(a, padj = FALSE) {
   if (padj) {
     bon <- (0.05 / nrow(a))
     cuts <- c(-1, -0.05, -bon, 0, bon, 0.05, 1)
-    bon <- ifelse(bon < 0.01, format(bon, scientific = TRUE, digits = 2), format(round(bon, 2), nsmall = 2))
+    bon <- ifelse(bon < 0.01, format(bon, scientific = TRUE, digits = 2), format(floor(bon, 2), nsmall = 2))
     labels <- c("NC", "p<0.05(Low risk)", paste0("p<", bon, "(Low risk)"), paste0("p<", bon, "(High risk)"), "p<0.05(High risk)", "NC")
     colors <- c("red1", "orangered", "skyblue1", "royalblue1", "blue4")
     cirp$value_group <- cut(cirp$value, breaks = cuts, labels = labels)
