@@ -32,8 +32,8 @@ forest_plot <- function(data, abline = TRUE, col_padj = FALSE, p.adjust.methods 
 
   if (col_padj) {
     data$padj <- p.adjust(data$pval, method = p.adjust.methods, n = p.adjust.n)
-    data$pval <- ifelse(data$pval < 0.01, format(data$pval, scientific = TRUE, digits = 2), format(floor(data$pval), nsmall = 2))
-    data$padj <- ifelse(data$padj < 0.01, format(data$padj, scientific = TRUE, digits = 2), format(floor(data$padj, 2), nsmall = 2))
+    data$pval <- ifelse(data$pval < 0.01, format(data$pval, scientific = TRUE, digits = 2), format(floor(data$pval * 100) / 100, nsmall = 2))
+    data$padj <- ifelse(data$padj < 0.01, format(data$padj, scientific = TRUE, digits = 2), format(floor(data$padj * 100) / 100, nsmall = 2))
     data <- data %>%
       dplyr::select(exposure, outcome, nsnp, method, pval, ` `, OR, padj, or, or_lci95, or_uci95) %>%
       dplyr::rename(
@@ -58,7 +58,7 @@ forest_plot <- function(data, abline = TRUE, col_padj = FALSE, p.adjust.methods 
       theme = tm
     )
   } else {
-    data$pval <- ifelse(data$pval < 0.01, format(data$pval, scientific = TRUE, digits = 2), format(floor(data$pval), nsmall = 2))
+    data$pval <- ifelse(data$pval < 0.01, format(data$pval, scientific = TRUE, digits = 2), format(floor(data$pval * 100) / 100, nsmall = 2))
     data <- data %>%
       dplyr::select(exposure, outcome, nsnp, method, pval, ` `, OR, or, or_lci95, or_uci95) %>%
       dplyr::rename(
