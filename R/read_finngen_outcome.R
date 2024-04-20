@@ -34,5 +34,3 @@ read_finngen_outcome <- function(exp, trait, filepath, samplesize) {
   )
   return(out)
 }
-
-library(data.table)

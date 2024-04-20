@@ -7,13 +7,18 @@
 IVW_fix_random(
   dat,
   other_method = c("mr_egger_regression", "mr_weighted_median", "mr_raps"),
-  plot = FALSE
+  plot = FALSE,
+  Random_only = FALSE
 )
 }
 \arguments{
 \item{dat}{harmonization(using the function of harmonise_data)}
 
+\item{other_method}{the mr methods:"mr_egger_regression","mr_weighted_median", "mr_raps"}
+
 \item{plot}{the choice of showing the MR results visualization}
+
+\item{Random_only}{the choices of the only use IVW_mre}
 }
 \description{
 Return the main four MR results
