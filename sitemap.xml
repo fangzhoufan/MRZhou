@@ -16,9 +16,51 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/reference/IVW_fix_random.html</loc>
+  </url>
+  <url>
+    <loc>/reference/MRpresso.html</loc>
+  </url>
+  <url>
+    <loc>/reference/calculate_LD.html</loc>
+  </url>
+  <url>
+    <loc>/reference/circle_plot.html</loc>
+  </url>
+  <url>
+    <loc>/reference/combine_results.html</loc>
+  </url>
+  <url>
+    <loc>/reference/forest_plot.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_f.html</loc>
   </url>
   <url>
+    <loc>/reference/get_rsID_from_chrpos.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/mr_test.html</loc>
+  </url>
+  <url>
+    <loc>/reference/paper_table.html</loc>
+  </url>
+  <url>
+    <loc>/reference/read_finngen_exposure.html</loc>
+  </url>
+  <url>
+    <loc>/reference/read_finngen_outcome.html</loc>
+  </url>
+  <url>
+    <loc>/reference/snp_add_eaf.html</loc>
+  </url>
+  <url>
+    <loc>/reference/snp_phenoscanner.html</loc>
+  </url>
+  <url>
+    <loc>/reference/volcano_plot.html</loc>
   </url>
 </urlset>
