@@ -88,7 +88,7 @@ IVW_fix_random <- function(dat, other_method = c(
                 a1 <- p1[[1]] + ggsci::scale_color_lancet()
                 p2 <- mr_forest_plot(res_single)
                 a2 <- p2[[1]] + ggsci::scale_color_lancet()
-                res_loo <- mr_leaveoneout(dat,method = mr_ivw_mre)
+                res_loo <- mr_leaveoneout(dat, method = mr_ivw_mre)
                 p3 <- mr_leaveoneout_plot(res_loo)
                 a3 <- p3[[1]] + ggsci::scale_color_lancet()
                 p4 <- mr_funnel_plot(res_single)
@@ -105,7 +105,7 @@ IVW_fix_random <- function(dat, other_method = c(
                 a1 <- p1[[1]] + ggsci::scale_color_lancet()
                 p2 <- mr_forest_plot(res_single)
                 a2 <- p2[[1]] + ggsci::scale_color_lancet()
-                res_loo <- mr_leaveoneout(dat,method = mr_ivw_mre)
+                res_loo <- mr_leaveoneout(dat, method = mr_ivw_mre)
                 p3 <- mr_leaveoneout_plot(res_loo)
                 a3 <- p3[[1]] + ggsci::scale_color_lancet()
                 p4 <- mr_funnel_plot(res_single)
@@ -136,7 +136,7 @@ IVW_fix_random <- function(dat, other_method = c(
                   a1 <- p1[[1]] + ggsci::scale_color_lancet()
                   p2 <- mr_forest_plot(res_single)
                   a2 <- p2[[1]] + ggsci::scale_color_lancet()
-                  res_loo <- mr_leaveoneout(dat,method = mr_ivw_fe)
+                  res_loo <- mr_leaveoneout(dat, method = mr_ivw_fe)
                   p3 <- mr_leaveoneout_plot(res_loo)
                   a3 <- p3[[1]] + ggsci::scale_color_lancet()
                   p4 <- mr_funnel_plot(res_single)
@@ -153,7 +153,7 @@ IVW_fix_random <- function(dat, other_method = c(
                   a1 <- p1[[1]] + ggsci::scale_color_lancet()
                   p2 <- mr_forest_plot(res_single)
                   a2 <- p2[[1]] + ggsci::scale_color_lancet()
-                  res_loo <- mr_leaveoneout(dat,method = mr_ivw_fe)
+                  res_loo <- mr_leaveoneout(dat, method = mr_ivw_fe)
                   p3 <- mr_leaveoneout_plot(res_loo)
                   a3 <- p3[[1]] + ggsci::scale_color_lancet()
                   p4 <- mr_funnel_plot(res_single)
@@ -182,7 +182,7 @@ IVW_fix_random <- function(dat, other_method = c(
                   a1 <- p1[[1]] + ggsci::scale_color_lancet()
                   p2 <- mr_forest_plot(res_single)
                   a2 <- p2[[1]] + ggsci::scale_color_lancet()
-                  res_loo <- mr_leaveoneout(dat,method = mr_ivw_mre)
+                  res_loo <- mr_leaveoneout(dat, method = mr_ivw_mre)
                   p3 <- mr_leaveoneout_plot(res_loo)
                   a3 <- p3[[1]] + ggsci::scale_color_lancet()
                   p4 <- mr_funnel_plot(res_single)
@@ -199,7 +199,7 @@ IVW_fix_random <- function(dat, other_method = c(
                   a1 <- p1[[1]] + ggsci::scale_color_lancet()
                   p2 <- mr_forest_plot(res_single)
                   a2 <- p2[[1]] + ggsci::scale_color_lancet()
-                  res_loo <- mr_leaveoneout(dat,method = mr_ivw_mre)
+                  res_loo <- mr_leaveoneout(dat, method = mr_ivw_mre)
                   p3 <- mr_leaveoneout_plot(res_loo)
                   a3 <- p3[[1]] + ggsci::scale_color_lancet()
                   p4 <- mr_funnel_plot(res_single)
@@ -221,16 +221,16 @@ IVW_fix_random <- function(dat, other_method = c(
         }
 
         if (plot) {
-          if(Random_only){
-            result1 <- handle_multiple_rows(dat1, plot = TRUE,Random_only=TRUE)
-          }else{
-            result1 <- handle_multiple_rows(dat1, plot = TRUE,Random_only=FALSE)
+          if (Random_only) {
+            result1 <- handle_multiple_rows(dat1, plot = TRUE, Random_only = TRUE)
+          } else {
+            result1 <- handle_multiple_rows(dat1, plot = TRUE, Random_only = FALSE)
           }
         } else {
-          if(Random_only){
-            result1 <- handle_multiple_rows(dat1, plot = FALSE,Random_only=TRUE)
-          }else{
-            result1 <- handle_multiple_rows(dat1, plot = FALSE,Random_only=FALSE)
+          if (Random_only) {
+            result1 <- handle_multiple_rows(dat1, plot = FALSE, Random_only = TRUE)
+          } else {
+            result1 <- handle_multiple_rows(dat1, plot = FALSE, Random_only = FALSE)
           }
         }
       }
