@@ -81,7 +81,7 @@ IVW_fix_random <- function(dat, other_method = c(
             res$method[res$method == "Robust adjusted profile score (RAPS)"] <- "MR.RAPS"
 
             if (plot) {
-              if (res$pval[res$method == "Inverse variance weighted"] < 0.05 / (exposure_length * exposure_length)) {
+              if (res$pval[res$method == "Inverse variance weighted"] < 0.05 / (exposure_length * outcome_length)) {
                 res_single <- mr_singlesnp(dat, all_method = c("mr_ivw_mre", "mr_egger_regression"))
                 res_single$SNP[res_single$SNP == "All - Inverse variance weighted (multiplicative random effects)"] <- "All - Inverse variance weighted"
                 p1 <- mr_scatter_plot(res, dat)
@@ -93,11 +93,12 @@ IVW_fix_random <- function(dat, other_method = c(
                 a3 <- p3[[1]] + ggsci::scale_color_lancet()
                 p4 <- mr_funnel_plot(res_single)
                 a4 <- p4[[1]] + ggsci::scale_color_lancet()
-
-                ggsave(a1, file = paste0("BH_", strings1, "_to_", strings2, "_scatter_plot.pdf"), width = 7, height = 7)
-                ggsave(a2, file = paste0("BH_", strings1, "_to_", strings2, "_forest_plot.pdf"), width = 7, height = 7)
-                ggsave(a3, file = paste0("BH_", strings1, "_to_", strings2, "_leaveoneout_plot.pdf"), width = 7, height = 7)
-                ggsave(a4, file = paste0("BH_", strings1, "_to_", strings2, "_funnel_plot.pdf"), width = 7, height = 7)
+                folder_name <- paste0(strings1, "_to_", strings2)
+                dir.create(folder_name)
+                ggsave(a1, file = paste0(folder_name, "/Ajusted_scatter_plot.pdf"), width = 7, height = 7)
+                ggsave(a2, file = paste0(folder_name, "/Ajusted_forest_plot.pdf"), width = 7, height = 7)
+                ggsave(a3, file = paste0(folder_name, "/Ajusted_leaveoneout_plot.pdf"), width = 7, height = 7)
+                ggsave(a4, file = paste0(folder_name, "/Ajusted_funnel_plot.pdf"), width = 7, height = 7)
               } else if (res$pval[res$method == "Inverse variance weighted"] < 0.05) {
                 res_single <- mr_singlesnp(dat, all_method = c("mr_ivw_mre", "mr_egger_regression"))
                 res_single$SNP[res_single$SNP == "All - Inverse variance weighted (multiplicative random effects)"] <- "All - Inverse variance weighted"
@@ -110,11 +111,12 @@ IVW_fix_random <- function(dat, other_method = c(
                 a3 <- p3[[1]] + ggsci::scale_color_lancet()
                 p4 <- mr_funnel_plot(res_single)
                 a4 <- p4[[1]] + ggsci::scale_color_lancet()
-
-                ggsave(a1, file = paste0(strings1, "_to_", strings2, "_scatter_plot.pdf"), width = 7, height = 7)
-                ggsave(a2, file = paste0(strings1, "_to_", strings2, "_forest_plot.pdf"), width = 7, height = 7)
-                ggsave(a3, file = paste0(strings1, "_to_", strings2, "_leaveoneout_plot.pdf"), width = 7, height = 7)
-                ggsave(a4, file = paste0(strings1, "_to_", strings2, "_funnel_plot.pdf"), width = 7, height = 7)
+                folder_name <- paste0(strings1, "_to_", strings2)
+                dir.create(folder_name)
+                ggsave(a1, file = paste0(folder_name, "/scatter_plot.pdf"), width = 7, height = 7)
+                ggsave(a2, file = paste0(folder_name, "/forest_plot.pdf"), width = 7, height = 7)
+                ggsave(a3, file = paste0(folder_name, "/leaveoneout_plot.pdf"), width = 7, height = 7)
+                ggsave(a4, file = paste0(folder_name, "/funnel_plot.pdf"), width = 7, height = 7)
               }
             }
 
@@ -129,7 +131,7 @@ IVW_fix_random <- function(dat, other_method = c(
               res$method[res$method == "Robust adjusted profile score (RAPS)"] <- "MR.RAPS"
 
               if (plot) {
-                if (res$pval[res$method == "Inverse variance weighted"] < 0.05 / (exposure_length * exposure_length)) {
+                if (res$pval[res$method == "Inverse variance weighted"] < 0.05 / (exposure_length * outcome_length)) {
                   res_single <- mr_singlesnp(dat, all_method = c("mr_ivw_fe", "mr_egger_regression"))
                   res_single$SNP[res_single$SNP == "All - Inverse variance weighted (fixed effects)"] <- "All - Inverse variance weighted"
                   p1 <- mr_scatter_plot(res, dat)
@@ -141,11 +143,12 @@ IVW_fix_random <- function(dat, other_method = c(
                   a3 <- p3[[1]] + ggsci::scale_color_lancet()
                   p4 <- mr_funnel_plot(res_single)
                   a4 <- p4[[1]] + ggsci::scale_color_lancet()
-
-                  ggsave(a1, file = paste0("BH_", strings1, "_to_", strings2, "_scatter_plot.pdf"), width = 7, height = 7)
-                  ggsave(a2, file = paste0("BH_", strings1, "_to_", strings2, "_forest_plot.pdf"), width = 7, height = 7)
-                  ggsave(a3, file = paste0("BH_", strings1, "_to_", strings2, "_leaveoneout_plot.pdf"), width = 7, height = 7)
-                  ggsave(a4, file = paste0("BH_", strings1, "_to_", strings2, "_funnel_plot.pdf"), width = 7, height = 7)
+                  folder_name <- paste0(strings1, "_to_", strings2)
+                  dir.create(folder_name)
+                  ggsave(a1, file = paste0(folder_name, "/Ajusted_scatter_plot.pdf"), width = 7, height = 7)
+                  ggsave(a2, file = paste0(folder_name, "/Ajusted_forest_plot.pdf"), width = 7, height = 7)
+                  ggsave(a3, file = paste0(folder_name, "/Ajusted_leaveoneout_plot.pdf"), width = 7, height = 7)
+                  ggsave(a4, file = paste0(folder_name, "/Ajusted_funnel_plot.pdf"), width = 7, height = 7)
                 } else if (res$pval[res$method == "Inverse variance weighted"] < 0.05) {
                   res_single <- mr_singlesnp(dat, all_method = c("mr_ivw_fe", "mr_egger_regression"))
                   res_single$SNP[res_single$SNP == "All - Inverse variance weighted (fixed effects)"] <- "All - Inverse variance weighted"
@@ -158,11 +161,12 @@ IVW_fix_random <- function(dat, other_method = c(
                   a3 <- p3[[1]] + ggsci::scale_color_lancet()
                   p4 <- mr_funnel_plot(res_single)
                   a4 <- p4[[1]] + ggsci::scale_color_lancet()
-
-                  ggsave(a1, file = paste0(strings1, "_to_", strings2, "_scatter_plot.pdf"), width = 7, height = 7)
-                  ggsave(a2, file = paste0(strings1, "_to_", strings2, "_forest_plot.pdf"), width = 7, height = 7)
-                  ggsave(a3, file = paste0(strings1, "_to_", strings2, "_leaveoneout_plot.pdf"), width = 7, height = 7)
-                  ggsave(a4, file = paste0(strings1, "_to_", strings2, "_funnel_plot.pdf"), width = 7, height = 7)
+                  folder_name <- paste0(strings1, "_to_", strings2)
+                  dir.create(folder_name)
+                  ggsave(a1, file = paste0(folder_name, "/scatter_plot.pdf"), width = 7, height = 7)
+                  ggsave(a2, file = paste0(folder_name, "/forest_plot.pdf"), width = 7, height = 7)
+                  ggsave(a3, file = paste0(folder_name, "/leaveoneout_plot.pdf"), width = 7, height = 7)
+                  ggsave(a4, file = paste0(folder_name, "/funnel_plot.pdf"), width = 7, height = 7)
                 }
               }
               res <- res %>% dplyr::select(exposure, outcome, method, nsnp, b, se, pval)
@@ -175,7 +179,7 @@ IVW_fix_random <- function(dat, other_method = c(
               res$method[res$method == "Robust adjusted profile score (RAPS)"] <- "MR.RAPS"
 
               if (plot) {
-                if (res$pval[res$method == "Inverse variance weighted"] < 0.05 / (exposure_length * exposure_length)) {
+                if (res$pval[res$method == "Inverse variance weighted"] < 0.05 / (exposure_length * outcome_length)) {
                   res_single <- mr_singlesnp(dat, all_method = c("mr_ivw_mre", "mr_egger_regression"))
                   res_single$SNP[res_single$SNP == "All - Inverse variance weighted (multiplicative random effects)"] <- "All - Inverse variance weighted"
                   p1 <- mr_scatter_plot(res, dat)
@@ -187,11 +191,12 @@ IVW_fix_random <- function(dat, other_method = c(
                   a3 <- p3[[1]] + ggsci::scale_color_lancet()
                   p4 <- mr_funnel_plot(res_single)
                   a4 <- p4[[1]] + ggsci::scale_color_lancet()
-
-                  ggsave(a1, file = paste0("BH_", strings1, "_to_", strings2, "_scatter_plot.pdf"), width = 7, height = 7)
-                  ggsave(a2, file = paste0("BH_", strings1, "_to_", strings2, "_forest_plot.pdf"), width = 7, height = 7)
-                  ggsave(a3, file = paste0("BH_", strings1, "_to_", strings2, "_leaveoneout_plot.pdf"), width = 7, height = 7)
-                  ggsave(a4, file = paste0("BH_", strings1, "_to_", strings2, "_funnel_plot.pdf"), width = 7, height = 7)
+                  folder_name <- paste0(strings1, "_to_", strings2)
+                  dir.create(folder_name)
+                  ggsave(a1, file = paste0(folder_name, "/Ajusted_scatter_plot.pdf"), width = 7, height = 7)
+                  ggsave(a2, file = paste0(folder_name, "/Ajusted_forest_plot.pdf"), width = 7, height = 7)
+                  ggsave(a3, file = paste0(folder_name, "/Ajusted_leaveoneout_plot.pdf"), width = 7, height = 7)
+                  ggsave(a4, file = paste0(folder_name, "/Ajusted_funnel_plot.pdf"), width = 7, height = 7)
                 } else if (res$pval[res$method == "Inverse variance weighted"] < 0.05) {
                   res_single <- mr_singlesnp(dat, all_method = c("mr_ivw_mre", "mr_egger_regression"))
                   res_single$SNP[res_single$SNP == "All - Inverse variance weighted (multiplicative random effects)"] <- "All - Inverse variance weighted"
@@ -204,11 +209,12 @@ IVW_fix_random <- function(dat, other_method = c(
                   a3 <- p3[[1]] + ggsci::scale_color_lancet()
                   p4 <- mr_funnel_plot(res_single)
                   a4 <- p4[[1]] + ggsci::scale_color_lancet()
-
-                  ggsave(a1, file = paste0(strings1, "_to_", strings2, "_scatter_plot.pdf"), width = 7, height = 7)
-                  ggsave(a2, file = paste0(strings1, "_to_", strings2, "_forest_plot.pdf"), width = 7, height = 7)
-                  ggsave(a3, file = paste0(strings1, "_to_", strings2, "_leaveoneout_plot.pdf"), width = 7, height = 7)
-                  ggsave(a4, file = paste0(strings1, "_to_", strings2, "_funnel_plot.pdf"), width = 7, height = 7)
+                  folder_name <- paste0(strings1, "_to_", strings2)
+                  dir.create(folder_name)
+                  ggsave(a1, file = paste0(folder_name, "/scatter_plot.pdf"), width = 7, height = 7)
+                  ggsave(a2, file = paste0(folder_name, "/forest_plot.pdf"), width = 7, height = 7)
+                  ggsave(a3, file = paste0(folder_name, "/leaveoneout_plot.pdf"), width = 7, height = 7)
+                  ggsave(a4, file = paste0(folder_name, "/funnel_plot.pdf"), width = 7, height = 7)
                 }
               }
 
