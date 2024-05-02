@@ -4,10 +4,12 @@
 \alias{volcano_plot}
 \title{Return a volcano plot}
 \usage{
-volcano_plot(mydata)
+volcano_plot(mydata, adjust = "BH")
 }
 \arguments{
 \item{mydata}{The combine_results()  function returned a result}
+
+\item{adjust}{The choose of 'BH','FDR','None'}
 }
 \value{
 Return a volcano plot
