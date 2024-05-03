@@ -9,7 +9,7 @@
 #' @examples
 #' library(ggrepel)
 #' library(gt)
-volcano_plot <- function(mydata,adjust='BH') {
+volcano_plot <- function(mydata, adjust = "BH") {
   # 数据处理
   mydata <- mydata %>%
     dplyr::select(exposure, `b_Inverse variance weighted`, `pval_Inverse variance weighted`) %>%
@@ -26,7 +26,7 @@ volcano_plot <- function(mydata,adjust='BH') {
 
 
   # 数据处理
-  if(adjust=='BH'){
+  if (adjust == "BH") {
     mydata1 <- mydata %>%
       mutate(expression = case_when(
         OR >= 1 & Pval < 0.05 ~ "High risk",
@@ -55,9 +55,9 @@ volcano_plot <- function(mydata,adjust='BH') {
       geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
       geom_hline(yintercept = -log10(adjustedp), linetype = "dashed", color = "black")
     volc_plot2 <- volc_plot1 +
-      geom_label_repel(data = top_10,aes(OR, -log10(Pval), label = ID), size = 2)
-  }else if(adjust=='FDR'){
-    mydata$padj <- p.adjust(mydata$Pval,method='fdr')
+      geom_label_repel(data = top_10, aes(OR, -log10(Pval), label = ID), size = 2)
+  } else if (adjust == "FDR") {
+    mydata$padj <- p.adjust(mydata$Pval, method = "fdr")
     mydata1 <- mydata %>%
       mutate(expression = case_when(
         OR >= 1 & padj < 0.05 ~ "High risk",
@@ -81,8 +81,8 @@ volcano_plot <- function(mydata,adjust='BH') {
       # 添加分界线
       geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black")
     volc_plot2 <- volc_plot1 +
-      geom_label_repel(data = top_10,aes(OR, -log10(padj), label = ID), size = 2)
-  }else if(adjust=='None'){
+      geom_label_repel(data = top_10, aes(OR, -log10(padj), label = ID), size = 2)
+  } else if (adjust == "None") {
     mydata1 <- mydata %>%
       mutate(expression = case_when(
         OR >= 1 & Pval < 0.05 ~ "High risk",
@@ -106,7 +106,7 @@ volcano_plot <- function(mydata,adjust='BH') {
       # 添加分界线
       geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black")
     volc_plot2 <- volc_plot1 +
-      geom_label_repel(data = top_10,aes(OR, -log10(Pval), label = ID), size = 2)
+      geom_label_repel(data = top_10, aes(OR, -log10(Pval), label = ID), size = 2)
   }
 
   return(volc_plot2)
