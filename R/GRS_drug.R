@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-GRS <- function(dat) {
+GRS_drug <- function(dat) {
   exposures <- unique(dat$exposure)
   outcomes <- unique(dat$outcome)
   grs_data_all <- data.frame() # 创建一个空数据框来存储所有结果
