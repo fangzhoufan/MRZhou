@@ -20,5 +20,5 @@ Return the GSMR analysis dataframe
 Return the GSMR analysis
 }
 \examples{
-https://yanglab.westlake.edu.cn/software/gsmr/
+#https://yanglab.westlake.edu.cn/software/gsmr/
 }

@@ -7,7 +7,7 @@
 #' @return Return the GSMR analysis dataframe
 #' @export
 #'
-#' @examples https://yanglab.westlake.edu.cn/software/gsmr/
+#' @examples #https://yanglab.westlake.edu.cn/software/gsmr/
 GSMR<-function(dat,plot=FALSE,folder=NULL){
   if (!is.null(folder)) {
     dir.create(folder, showWarnings = FALSE)
