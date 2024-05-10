@@ -76,14 +76,17 @@ GSMR<-function(dat,plot=FALSE,folder=NULL){
                              bzy = bzy[filtered_index],
                              bzx_se = bzx_se[filtered_index],
                              bzy_se = bzy_se[filtered_index])
+          # 使用 bquote 函数创建动态标签
+          x_label <- bquote(.(as.name(exp)) ~ (italic(b[zx])))
+          y_label <- bquote(.(as.name(out)) ~ (italic(b[zy])))
           # 创建散点图
           p<-ggplot(data, aes(x = bzx, y = bzy)) +
             geom_point(shape = 20, size = 2, color = effect_col) +
             geom_segment(aes(x=bzx - bzx_se,xend=bzx + bzx_se,y=bzy, yend  = bzy), size = 0.5, color = effect_col) +
             geom_segment(aes(x=bzx ,xend=bzx,y=bzy-bzy_se, yend  = bzy+bzy_se), size = 0.5, color = effect_col) +
             geom_abline(intercept = 0, slope = gsmr_results$bxy, linetype = "dashed", color = "dim grey") +
-            labs(x = expression(exp~(italic(b[zx]))),
-                 y = expression(out~(italic(b[zy]))))+
+            labs(x = eval(x_label),
+                 y = eval(y_label))+
             annotate("text", x = min(data$bzx), y = max(data$bzy),
                      label = paste("OR:", ifelse(OR>0.01,round(OR,2),sprintf("%.2e", OR)),
                                    "\nP-value:", p_val_formatted), hjust = 0, vjust = 1 ,
