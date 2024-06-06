@@ -37,6 +37,9 @@
     <loc>/reference/circle_plot.html</loc>
   </url>
   <url>
+    <loc>/reference/coloc_local.html</loc>
+  </url>
+  <url>
     <loc>/reference/combine_results.html</loc>
   </url>
   <url>
@@ -62,6 +65,9 @@
   </url>
   <url>
     <loc>/reference/read_finngen_outcome.html</loc>
+  </url>
+  <url>
+    <loc>/reference/read_vcf.html</loc>
   </url>
   <url>
     <loc>/reference/snp_add_eaf.html</loc>
