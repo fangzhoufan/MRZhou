@@ -54,19 +54,20 @@ SMR_analysis <- function(smr_exe_dir = "/public/home/fanfangzhou/apps/SMR/smr_li
 
 
   cmd <- vector()
+
   # 循环处理每一个GWAS文件
   for (i in 1:length(gwas_dir)) {
     # 构建输出目录
     name <- gsub(".ma", "", gwas_dir[i])
-    beqtl_dir <- file.path(getwd(), gwas_dir[i])
+    gwas <- file.path(getwd(), gwas_dir[i])
+    beqtl_dir <- file.path(getwd(), outcome_prefix, outcome_prefix)
     output_dir <- file.path(getwd(), outcome_prefix, name)
-    gwas_file <- file.path(getwd(), gwas_dir[i])
     # 构建完整的命令行
     cmd[i] <- paste(
       shQuote(smr_exe_dir),
       "--bfile", shQuote(g1000_dir),
-      "--gwas-summary", shQuote(beqtl_dir),
-      "--beqtl-summary", shQuote(output_dir),
+      "--gwas-summary", shQuote(gwas),
+      "--beqtl-summary", shQuote(beqtl_dir),
       "--out", shQuote(output_dir)
     )
   }
@@ -92,11 +93,6 @@ SMR_analysis <- function(smr_exe_dir = "/public/home/fanfangzhou/apps/SMR/smr_li
     system2(script_file, wait = TRUE)
   }
 
-
-  # 检查命令是否成功执行
-  if (result != 0) {
-    stop("SMR analysis failed with error code: ", result, " for file: ", gwas_file)
-  }
 
   message("SMR analysis completed successfully for all files.")
 }
