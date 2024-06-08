@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples # https://yanglab.westlake.edu.cn/software/gsmr/
-GSMR <- function(dat, plot = FALSE, folder = NULL, LDmatrix = TRUE) {
+GSMR <- function(dat, plot = FALSE, folder = NULL, LDmatrix = FALSE) {
   if (!is.null(folder)) {
     dir.create(folder, showWarnings = FALSE)
   }
@@ -42,80 +42,8 @@ GSMR <- function(dat, plot = FALSE, folder = NULL, LDmatrix = TRUE) {
             "bzy_pval" = pval.outcome,
             "bzy_n" = samplesize.outcome
           )
-        if (LDmatrix) {
-          tryCatch(
-            {
-              ldrho <- ieugwasr::ld_matrix(gsmr_data$SNP, with_alleles = FALSE)
-              # Estimate LD correlation matrix using R
-              snp_coeff_id <- colnames(ldrho)
-              snp_coeff <- ldrho
-
-              # Match the SNP genotype data with the summary data
-              snp_id <- Reduce(intersect, list(gsmr_data$SNP, snp_coeff_id))
-              gsmr_data <- gsmr_data[match(snp_id, gsmr_data$SNP), ]
-              snp_order <- match(snp_id, snp_coeff_id)
-              snp_coeff_id <- snp_coeff_id[snp_order]
-              snp_coeff <- snp_coeff[, snp_order]
-
-              # Calculate the LD correlation matrix
-              ldrho <- cor(snp_coeff)
-
-              # Check the size of the correlation matrix and double-check if the order of the SNPs in the LD correlation matrix is consistent with that in the GWAS summary data
-              colnames(ldrho) <- rownames(ldrho) <- snp_coeff_id
-
-              bzx <- gsmr_data$bzx # SNP effects on the risk factor
-              bzx_se <- gsmr_data$bzx_se # standard errors of bzx
-              bzx_pval <- gsmr_data$bzx_pval # p-values for bzx
-              bzy <- gsmr_data$bzy # SNP effects on the disease
-              bzy_se <- gsmr_data$bzy_se # standard errors of bzy
-              bzy_pval <- gsmr_data$bzy_pval # p-values for bzy
-              n_ref <- 503 # Sample size of the reference sample used to calculate the LD matrix
-              gwas_thresh <- 5e-8 # GWAS threshold to select SNPs as the instruments for the GSMR analysis
-              multi_snps_heidi_thresh <- 0.01 # p-value threshold for multi-SNP-based global HEIDI-outlier analysis
-              nsnps_thresh <- 2 # the minimum number of instruments required for the GSMR analysis
-              heidi_outlier_flag <- T # flag for HEIDI-outlier analysis
-              ld_r2_thresh <- 0.05 # LD r2 threshold to remove SNPs in high LD
-              ld_fdr_thresh <- 0.05 # FDR threshold to remove the chance correlations between the SNP instruments
-              gsmr2_beta <- 1 # 0 - the original HEIDI-outlier method; 1 - the new HEIDI-outlier method that is currently under development
-
-              gsmr_results <- gsmr(bzx, bzx_se, bzx_pval, bzy, bzy_se, bzy_pval, ldrho, snp_coeff_id, n_ref, heidi_outlier_flag, gwas_thresh, single_snp_heidi_thresh, multi_snps_heidi_thresh, nsnps_thresh, ld_r2_thresh, ld_fdr_thresh, gsmr2_beta) # GSMR analysis
-              filtered_index <- gsmr_results$used_index
-            },
-            error = function(e) {
-              # 如果发生错误，执行这里的代码
-              custom_error_message <- "LD矩阵时发生错误。我们进行假设LD没有相关性"
-              cat("计算", exp, " ~ ", out, "：", custom_error_message, "\n")
-              cat("原始错误信息：", e$message, "\n")
-
-              # 清除第一部分运行时创建的变量
-              rm(list = c("ldrho", "snp_coeff_id", "snp_coeff", "snp_id", "snp_order"))
-              # 跳到第二部分的代码
-              ldrho <- diag(nrow(gsmr_data))
-              colnames(ldrho) <- rownames(ldrho) <- snp_coeff_id <- snpid <- as.character(gsmr_data$SNP)
-
-              bzx <- gsmr_data$bzx # SNP effects on the risk factor
-              bzx_se <- gsmr_data$bzx_se # standard errors of bzx
-              bzx_pval <- gsmr_data$bzx_pval # p-values for bzx
-              bzy <- gsmr_data$bzy # SNP effects on the disease
-              bzy_se <- gsmr_data$bzy_se # standard errors of bzy
-              bzy_pval <- gsmr_data$bzy_pval # p-values for bzy
-              n_ref <- 503 # Sample size of the reference sample used to calculate the LD matrix
-              gwas_thresh <- 5e-8 # GWAS threshold to select SNPs as the instruments for the GSMR analysis
-              multi_snps_heidi_thresh <- 0.01 # p-value threshold for multi-SNP-based global HEIDI-outlier analysis
-              nsnps_thresh <- 2 # the minimum number of instruments required for the GSMR analysis
-              heidi_outlier_flag <- T # flag for HEIDI-outlier analysis
-              ld_r2_thresh <- 0.05 # LD r2 threshold to remove SNPs in high LD
-              ld_fdr_thresh <- 0.05 # FDR threshold to remove the chance correlations between the SNP instruments
-              gsmr2_beta <- 1 # 0 - the original HEIDI-outlier method; 1 - the new HEIDI-outlier method that is currently under development
-
-              gsmr_results <- gsmr(bzx, bzx_se, bzx_pval, bzy, bzy_se, bzy_pval, ldrho, snp_coeff_id, n_ref, heidi_outlier_flag, gwas_thresh, single_snp_heidi_thresh, multi_snps_heidi_thresh, nsnps_thresh, ld_r2_thresh, ld_fdr_thresh, gsmr2_beta) # GSMR analysis
-              filtered_index <- gsmr_results$used_index
-            }
-          )
-        } else {
-          ldrho <- diag(nrow(gsmr_data))
-          colnames(ldrho) <- rownames(ldrho) <- snp_coeff_id <- snpid <- as.character(gsmr_data$SNP)
-
+        gsmr_data2 <- gsmr_data
+        perform_gsmr_analysis <- function(gsmr_data, ldrho, snp_coeff_id) {
           bzx <- gsmr_data$bzx # SNP effects on the risk factor
           bzx_se <- gsmr_data$bzx_se # standard errors of bzx
           bzx_pval <- gsmr_data$bzx_pval # p-values for bzx
@@ -130,14 +58,53 @@ GSMR <- function(dat, plot = FALSE, folder = NULL, LDmatrix = TRUE) {
           ld_r2_thresh <- 0.05 # LD r2 threshold to remove SNPs in high LD
           ld_fdr_thresh <- 0.05 # FDR threshold to remove the chance correlations between the SNP instruments
           gsmr2_beta <- 1 # 0 - the original HEIDI-outlier method; 1 - the new HEIDI-outlier method that is currently under development
+          gsmr_results <- gsmr2::gsmr(bzx, bzx_se, bzx_pval, bzy, bzy_se, bzy_pval, ldrho, snp_coeff_id, n_ref, heidi_outlier_flag, gwas_thresh, single_snp_heidi_thresh, multi_snps_heidi_thresh, nsnps_thresh, ld_r2_thresh, ld_fdr_thresh, gsmr2_beta) # GSMR analysis
+          return(gsmr_results)
+        }
+        if (LDmatrix) {
+          ldrho <- ieugwasr::ld_matrix(gsmr_data$SNP, with_alleles = FALSE)
+          # Estimate LD correlation matrix using R
+          snp_coeff_id <- colnames(ldrho)
+          snp_coeff <- ldrho
 
-          gsmr_results <- gsmr(bzx, bzx_se, bzx_pval, bzy, bzy_se, bzy_pval, ldrho, snp_coeff_id, n_ref, heidi_outlier_flag, gwas_thresh, single_snp_heidi_thresh, multi_snps_heidi_thresh, nsnps_thresh, ld_r2_thresh, ld_fdr_thresh, gsmr2_beta) # GSMR analysis
-          filtered_index <- gsmr_results$used_index
+          # Match the SNP genotype data with the summary data
+          snp_id <- Reduce(intersect, list(gsmr_data$SNP, snp_coeff_id))
+          gsmr_data <- gsmr_data[match(snp_id, gsmr_data$SNP), ]
+          snp_order <- match(snp_id, snp_coeff_id)
+          snp_coeff_id <- snp_coeff_id[snp_order]
+          snp_coeff <- snp_coeff[, snp_order]
+
+          # Calculate the LD correlation matrix
+          ldrho <- cor(snp_coeff)
+
+          # Check the size of the correlation matrix and double-check if the order of the SNPs in the LD correlation matrix is consistent with that in the GWAS summary data
+          colnames(ldrho) <- rownames(ldrho) <- snp_coeff_id
+          gsmr_results <- tryCatch(
+            {
+              perform_gsmr_analysis(gsmr_data, ldrho, snp_coeff_id)
+            },
+            error = function(e) {
+              gsmr_data <- gsmr_data2
+              custom_error_message <- "LD矩阵时发生错误。我们进行假设LD没有相关性"
+              cat("计算", exp, " ~ ", out, "：", custom_error_message, "\n")
+              cat("原始错误信息：", e$message, "\n")
+
+              # 清除第一部分运行时创建的变量
+              rm(list = c("ldrho", "snp_coeff_id", "snp_coeff", "snp_id", "snp_order"))
+              ldrho <- diag(nrow(gsmr_data))
+              colnames(ldrho) <- rownames(ldrho) <- snp_coeff_id <- snpid <- as.character(gsmr_data$SNP)
+              perform_gsmr_analysis(gsmr_data, ldrho, snp_coeff_id)
+            }
+          )
+        } else {
+          ldrho <- diag(nrow(gsmr_data))
+          colnames(ldrho) <- rownames(ldrho) <- snp_coeff_id <- snpid <- as.character(gsmr_data$SNP)
+          gsmr_results <- perform_gsmr_analysis(gsmr_data, ldrho, snp_coeff_id)
         }
 
 
 
-
+        filtered_index <- gsmr_results$used_index
 
         b <- round(gsmr_results$bxy, 6)
         se <- round(gsmr_results$bxy_se, 6)
