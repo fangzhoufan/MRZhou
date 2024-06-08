@@ -70,18 +70,20 @@ smr_plot <- function(smr_exe_dir = "/public/home/fanfangzhou/apps/SMR/smr_linux"
 
   message("SMR analysis completed successfully for all files.")
   source(Rscript)
-  for (i in 1:length(gwas_dir)){
-    name<-gsub('.ma','',gwas_dir[i])
-    filepath<-paste0(file.path(getwd(),outcome_prefix),'/plot/',name,'.',queried_probe,'.txt')
-    SMRData = ReadSMRData(filepath)
-    if(LocusPlot){
-      pdf(paste0(file.path(getwd(),outcome_prefix),'/plot/',name,'.',queried_probe,'_SMRLocusPlot.pdf'),width =10,height =6)
-      SMRLocusPlot(data=SMRData,
-                   smr_thresh=8.4e-6, heidi_thresh=0.05, plotWindow=1000, max_anno_probe=16)
+  for (i in 1:length(gwas_dir)) {
+    name <- gsub(".ma", "", gwas_dir[i])
+    filepath <- paste0(file.path(getwd(), outcome_prefix), "/plot/", name, ".", queried_probe, ".txt")
+    SMRData <- ReadSMRData(filepath)
+    if (LocusPlot) {
+      pdf(paste0(file.path(getwd(), outcome_prefix), "/plot/", name, ".", queried_probe, "_SMRLocusPlot.pdf"), width = 10, height = 6)
+      SMRLocusPlot(
+        data = SMRData,
+        smr_thresh = 8.4e-6, heidi_thresh = 0.05, plotWindow = 1000, max_anno_probe = 16
+      )
       dev.off()
-    }else{
-      pdf(paste0(file.path(getwd(),outcome_prefix),'/plot/',name,'.',queried_probe,'_SMREffectPlot.pdf'),width =7,height =6)
-      SMREffectPlot(data=SMRData, trait_name=paste0('GWAS: ',gwas_label))
+    } else {
+      pdf(paste0(file.path(getwd(), outcome_prefix), "/plot/", name, ".", queried_probe, "_SMREffectPlot.pdf"), width = 7, height = 6)
+      SMREffectPlot(data = SMRData, trait_name = paste0("GWAS: ", gwas_label))
       dev.off()
     }
   }

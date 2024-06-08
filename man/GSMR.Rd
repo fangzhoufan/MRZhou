@@ -4,7 +4,7 @@
 \alias{GSMR}
 \title{Return the GSMR analysis}
 \usage{
-GSMR(dat, plot = FALSE, folder = NULL)
+GSMR(dat, plot = FALSE, folder = NULL, LDmatrix = TRUE)
 }
 \arguments{
 \item{dat}{the harmonization data}
