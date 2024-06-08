@@ -3,6 +3,7 @@
 #' @param dat the harmonization data
 #' @param plot the choice of showing the picture
 #' @param folder the folder names
+#' @param LDmatrix  The choice of LD correlation matrix
 #'
 #' @return Return the GSMR analysis dataframe
 #' @export

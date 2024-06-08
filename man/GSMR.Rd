@@ -4,7 +4,7 @@
 \alias{GSMR}
 \title{Return the GSMR analysis}
 \usage{
-GSMR(dat, plot = FALSE, folder = NULL, LDmatrix = TRUE)
+GSMR(dat, plot = FALSE, folder = NULL, LDmatrix = FALSE)
 }
 \arguments{
 \item{dat}{the harmonization data}
@@ -12,6 +12,8 @@ GSMR(dat, plot = FALSE, folder = NULL, LDmatrix = TRUE)
 \item{plot}{the choice of showing the picture}
 
 \item{folder}{the folder names}
+
+\item{LDmatrix}{The choice of LD correlation matrix}
 }
 \value{
 Return the GSMR analysis dataframe
