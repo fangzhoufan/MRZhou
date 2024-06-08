@@ -21,6 +21,8 @@ GRS <- function(dat) {
           grs_dat$beta.outcome, grs_dat$se.outcome,
           n = nrow(grs_dat)
         )
+        b <- round(grs$ahat, 6)
+        se <- round(grs$aSE, 6)
         OR <- round(exp(grs$ahat), 6)
         CI_lower <- round(exp(grs$ahat - 1.96 * grs$aSE), 6)
         CI_upper <- round(exp(grs$ahat + 1.96 * grs$aSE), 6)
@@ -31,7 +33,7 @@ GRS <- function(dat) {
         } else {
           p_val_formatted <- round(p_val, 2)
         }
-        grs_data <- data.frame(Exposure = exp, Outcome = out, OR = ORs, p = p_val_formatted)
+        grs_data <- data.frame(Exposure = exp, Outcome = out,b = b, se = se, OR = ORs, p = p_val_formatted)
         grs_data <- grs_data %>% dplyr::rename("OR(95%CI)" = OR, "P value" = p)
         grs_data_all <- rbind(grs_data_all, grs_data) # 将每次计算的结果添加到总数据框中
       }
