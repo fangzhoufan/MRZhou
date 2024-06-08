@@ -44,21 +44,21 @@ GSMR <- function(dat, plot = FALSE, folder = NULL, LDmatrix = FALSE) {
             "bzy_n" = samplesize.outcome
           )
         gsmr_data2 <- gsmr_data
+        bzx <- gsmr_data$bzx # SNP effects on the risk factor
+        bzx_se <- gsmr_data$bzx_se # standard errors of bzx
+        bzx_pval <- gsmr_data$bzx_pval # p-values for bzx
+        bzy <- gsmr_data$bzy # SNP effects on the disease
+        bzy_se <- gsmr_data$bzy_se # standard errors of bzy
+        bzy_pval <- gsmr_data$bzy_pval # p-values for bzy
+        n_ref <- 503 # Sample size of the reference sample used to calculate the LD matrix
+        gwas_thresh <- 5e-8 # GWAS threshold to select SNPs as the instruments for the GSMR analysis
+        multi_snps_heidi_thresh <- 0.01 # p-value threshold for multi-SNP-based global HEIDI-outlier analysis
+        nsnps_thresh <- 2 # the minimum number of instruments required for the GSMR analysis
+        heidi_outlier_flag <- T # flag for HEIDI-outlier analysis
+        ld_r2_thresh <- 0.05 # LD r2 threshold to remove SNPs in high LD
+        ld_fdr_thresh <- 0.05 # FDR threshold to remove the chance correlations between the SNP instruments
+        gsmr2_beta <- 1 # 0 - the original HEIDI-outlier method; 1 - the new HEIDI-outlier method that is currently under development
         perform_gsmr_analysis <- function(gsmr_data, ldrho, snp_coeff_id) {
-          bzx <- gsmr_data$bzx # SNP effects on the risk factor
-          bzx_se <- gsmr_data$bzx_se # standard errors of bzx
-          bzx_pval <- gsmr_data$bzx_pval # p-values for bzx
-          bzy <- gsmr_data$bzy # SNP effects on the disease
-          bzy_se <- gsmr_data$bzy_se # standard errors of bzy
-          bzy_pval <- gsmr_data$bzy_pval # p-values for bzy
-          n_ref <- 503 # Sample size of the reference sample used to calculate the LD matrix
-          gwas_thresh <- 5e-8 # GWAS threshold to select SNPs as the instruments for the GSMR analysis
-          multi_snps_heidi_thresh <- 0.01 # p-value threshold for multi-SNP-based global HEIDI-outlier analysis
-          nsnps_thresh <- 2 # the minimum number of instruments required for the GSMR analysis
-          heidi_outlier_flag <- T # flag for HEIDI-outlier analysis
-          ld_r2_thresh <- 0.05 # LD r2 threshold to remove SNPs in high LD
-          ld_fdr_thresh <- 0.05 # FDR threshold to remove the chance correlations between the SNP instruments
-          gsmr2_beta <- 1 # 0 - the original HEIDI-outlier method; 1 - the new HEIDI-outlier method that is currently under development
           gsmr_results <- gsmr2::gsmr(bzx, bzx_se, bzx_pval, bzy, bzy_se, bzy_pval, ldrho, snp_coeff_id, n_ref, heidi_outlier_flag, gwas_thresh, single_snp_heidi_thresh, multi_snps_heidi_thresh, nsnps_thresh, ld_r2_thresh, ld_fdr_thresh, gsmr2_beta) # GSMR analysis
           return(gsmr_results)
         }
