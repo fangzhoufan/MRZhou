@@ -33,7 +33,7 @@ GRS_drug <- function(dat) {
         } else {
           p_val_formatted <- round(p_val, 2)
         }
-        grs_data <- data.frame(Exposure = exp, Outcome = out,b = b, se = se, OR = ORs, p = p_val_formatted)
+        grs_data <- data.frame(Exposure = exp, Outcome = out, b = b, se = se, OR = ORs, p = p_val_formatted)
         grs_data <- grs_data %>% dplyr::rename("OR(95%CI)" = OR, "P value" = p)
         grs_data_all <- rbind(grs_data_all, grs_data) # 将每次计算的结果添加到总数据框中
       }
