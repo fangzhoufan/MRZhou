@@ -26,7 +26,6 @@ read_finngen_exposure <- function(trait, filepath, samplesize, p_threshold = 5e-
       eaf_col = "af_alt", pval_col = "pval", gene_col = "nearest_genes",
       chr_col = "#chrom", pos_col = "pos"
     )
-    options(ieugwasr_api = "gwas-api.mrcieu.ac.uk/")
     df <- clump_data(df, clump_r2 = 0.001, clump_kb = 10000)
     if (nrow(df) == 0) {
       message("No data found after processing.")
