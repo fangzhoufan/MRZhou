@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples # https://yanglab.westlake.edu.cn/software/gsmr/
-GSMR <- function(dat, plot = FALSE, folder = NULL, LDmatrix = FALSE) {
+GSMR <- function(dat, plot = FALSE, folder = NULL, LDmatrix = FALSE,my_theme) {
   if (!is.null(folder)) {
     dir.create(folder, showWarnings = FALSE)
   }
@@ -147,7 +147,7 @@ GSMR <- function(dat, plot = FALSE, folder = NULL, LDmatrix = FALSE) {
                 "\nP-value:", p_val_formatted
               ), hjust = 0, vjust = 1,
               size = 4
-            )
+            )+my_theme
           folder_name <- paste0(exp, "_to_", out)
           ggsave(filename = paste0(folder, "/GSMR_", folder_name, "_plot.pdf"), p, width = 8, height = 7)
         }
