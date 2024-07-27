@@ -4,15 +4,26 @@
 #' @param plot the choice of showing the MR results visualization
 #' @param other_method  the mr methods:"mr_egger_regression","mr_weighted_median", "mr_raps"
 #' @param Random_only the choices of the only use IVW_mre
+#' @param my_theme the ggplot theme eg:Time new roman character
 #'
 #' @return
 #' @export
 #'
 #' @examples
+#'
+my_theme <-
+  ggplot2::theme(
+    text = ggplot2::element_text(family = "Times New Roman"),
+    plot.title = ggplot2::element_text(family = "Times New Roman"),
+    axis.title = ggplot2::element_text(family = "Times New Roman"),
+    axis.text = ggplot2::element_text(family = "Times New Roman"),
+    legend.title = ggplot2::element_text(family = "Times New Roman"),
+    legend.text = ggplot2::element_text(family = "Times New Roman")
+  )
 IVW_fix_random <- function(dat, other_method = c(
                              "mr_egger_regression",
                              "mr_weighted_median", "mr_raps"
-                           ), plot = FALSE, Random_only = FALSE) {
+                           ), plot = FALSE, Random_only = FALSE,my_theme) {
   # 检查输入数据框是否为空
   stopifnot(!is.null(dat) && nrow(dat) > 0)
   results <- data.frame() # 初始化结果数据框
@@ -85,14 +96,14 @@ IVW_fix_random <- function(dat, other_method = c(
                 res_single <- mr_singlesnp(dat, all_method = c("mr_ivw_mre", "mr_egger_regression"))
                 res_single$SNP[res_single$SNP == "All - Inverse variance weighted (multiplicative random effects)"] <- "All - Inverse variance weighted"
                 p1 <- mr_scatter_plot(res, dat)
-                a1 <- p1[[1]] + ggsci::scale_color_lancet()
+                a1 <- p1[[1]] + ggsci::scale_color_lancet()+my_theme
                 p2 <- mr_forest_plot(res_single)
-                a2 <- p2[[1]] + ggsci::scale_color_lancet()
+                a2 <- p2[[1]] + ggsci::scale_color_lancet()+my_theme
                 res_loo <- mr_leaveoneout(dat, method = mr_ivw_mre)
                 p3 <- mr_leaveoneout_plot(res_loo)
-                a3 <- p3[[1]] + ggsci::scale_color_lancet()
+                a3 <- p3[[1]] + ggsci::scale_color_lancet()+my_theme
                 p4 <- mr_funnel_plot(res_single)
-                a4 <- p4[[1]] + ggsci::scale_color_lancet()
+                a4 <- p4[[1]] + ggsci::scale_color_lancet()+my_theme
                 folder_name <- paste0(strings1, "_to_", strings2)
                 dir.create(folder_name)
                 ggsave(a1, file = paste0(folder_name, "/Ajusted_scatter_plot.pdf"), width = 7, height = 7)
@@ -103,14 +114,14 @@ IVW_fix_random <- function(dat, other_method = c(
                 res_single <- mr_singlesnp(dat, all_method = c("mr_ivw_mre", "mr_egger_regression"))
                 res_single$SNP[res_single$SNP == "All - Inverse variance weighted (multiplicative random effects)"] <- "All - Inverse variance weighted"
                 p1 <- mr_scatter_plot(res, dat)
-                a1 <- p1[[1]] + ggsci::scale_color_lancet()
+                a1 <- p1[[1]] + ggsci::scale_color_lancet()+my_theme
                 p2 <- mr_forest_plot(res_single)
-                a2 <- p2[[1]] + ggsci::scale_color_lancet()
+                a2 <- p2[[1]] + ggsci::scale_color_lancet()+my_theme
                 res_loo <- mr_leaveoneout(dat, method = mr_ivw_mre)
                 p3 <- mr_leaveoneout_plot(res_loo)
-                a3 <- p3[[1]] + ggsci::scale_color_lancet()
+                a3 <- p3[[1]] + ggsci::scale_color_lancet()+my_theme
                 p4 <- mr_funnel_plot(res_single)
-                a4 <- p4[[1]] + ggsci::scale_color_lancet()
+                a4 <- p4[[1]] + ggsci::scale_color_lancet()+my_theme
                 folder_name <- paste0(strings1, "_to_", strings2)
                 dir.create(folder_name)
                 ggsave(a1, file = paste0(folder_name, "/scatter_plot.pdf"), width = 7, height = 7)
@@ -135,14 +146,14 @@ IVW_fix_random <- function(dat, other_method = c(
                   res_single <- mr_singlesnp(dat, all_method = c("mr_ivw_fe", "mr_egger_regression"))
                   res_single$SNP[res_single$SNP == "All - Inverse variance weighted (fixed effects)"] <- "All - Inverse variance weighted"
                   p1 <- mr_scatter_plot(res, dat)
-                  a1 <- p1[[1]] + ggsci::scale_color_lancet()
+                  a1 <- p1[[1]] + ggsci::scale_color_lancet()+my_theme
                   p2 <- mr_forest_plot(res_single)
-                  a2 <- p2[[1]] + ggsci::scale_color_lancet()
+                  a2 <- p2[[1]] + ggsci::scale_color_lancet()+my_theme
                   res_loo <- mr_leaveoneout(dat, method = mr_ivw_fe)
                   p3 <- mr_leaveoneout_plot(res_loo)
-                  a3 <- p3[[1]] + ggsci::scale_color_lancet()
+                  a3 <- p3[[1]] + ggsci::scale_color_lancet()+my_theme
                   p4 <- mr_funnel_plot(res_single)
-                  a4 <- p4[[1]] + ggsci::scale_color_lancet()
+                  a4 <- p4[[1]] + ggsci::scale_color_lancet()+my_theme
                   folder_name <- paste0(strings1, "_to_", strings2)
                   dir.create(folder_name)
                   ggsave(a1, file = paste0(folder_name, "/Ajusted_scatter_plot.pdf"), width = 7, height = 7)
@@ -153,14 +164,14 @@ IVW_fix_random <- function(dat, other_method = c(
                   res_single <- mr_singlesnp(dat, all_method = c("mr_ivw_fe", "mr_egger_regression"))
                   res_single$SNP[res_single$SNP == "All - Inverse variance weighted (fixed effects)"] <- "All - Inverse variance weighted"
                   p1 <- mr_scatter_plot(res, dat)
-                  a1 <- p1[[1]] + ggsci::scale_color_lancet()
+                  a1 <- p1[[1]] + ggsci::scale_color_lancet()+my_theme
                   p2 <- mr_forest_plot(res_single)
-                  a2 <- p2[[1]] + ggsci::scale_color_lancet()
+                  a2 <- p2[[1]] + ggsci::scale_color_lancet()+my_theme
                   res_loo <- mr_leaveoneout(dat, method = mr_ivw_fe)
                   p3 <- mr_leaveoneout_plot(res_loo)
-                  a3 <- p3[[1]] + ggsci::scale_color_lancet()
+                  a3 <- p3[[1]] + ggsci::scale_color_lancet()+my_theme
                   p4 <- mr_funnel_plot(res_single)
-                  a4 <- p4[[1]] + ggsci::scale_color_lancet()
+                  a4 <- p4[[1]] + ggsci::scale_color_lancet()+my_theme
                   folder_name <- paste0(strings1, "_to_", strings2)
                   dir.create(folder_name)
                   ggsave(a1, file = paste0(folder_name, "/scatter_plot.pdf"), width = 7, height = 7)
@@ -183,14 +194,14 @@ IVW_fix_random <- function(dat, other_method = c(
                   res_single <- mr_singlesnp(dat, all_method = c("mr_ivw_mre", "mr_egger_regression"))
                   res_single$SNP[res_single$SNP == "All - Inverse variance weighted (multiplicative random effects)"] <- "All - Inverse variance weighted"
                   p1 <- mr_scatter_plot(res, dat)
-                  a1 <- p1[[1]] + ggsci::scale_color_lancet()
+                  a1 <- p1[[1]] + ggsci::scale_color_lancet()+my_theme
                   p2 <- mr_forest_plot(res_single)
-                  a2 <- p2[[1]] + ggsci::scale_color_lancet()
+                  a2 <- p2[[1]] + ggsci::scale_color_lancet()+my_theme
                   res_loo <- mr_leaveoneout(dat, method = mr_ivw_mre)
                   p3 <- mr_leaveoneout_plot(res_loo)
-                  a3 <- p3[[1]] + ggsci::scale_color_lancet()
+                  a3 <- p3[[1]] + ggsci::scale_color_lancet()+my_theme
                   p4 <- mr_funnel_plot(res_single)
-                  a4 <- p4[[1]] + ggsci::scale_color_lancet()
+                  a4 <- p4[[1]] + ggsci::scale_color_lancet()+my_theme
                   folder_name <- paste0(strings1, "_to_", strings2)
                   dir.create(folder_name)
                   ggsave(a1, file = paste0(folder_name, "/Ajusted_scatter_plot.pdf"), width = 7, height = 7)
@@ -201,14 +212,16 @@ IVW_fix_random <- function(dat, other_method = c(
                   res_single <- mr_singlesnp(dat, all_method = c("mr_ivw_mre", "mr_egger_regression"))
                   res_single$SNP[res_single$SNP == "All - Inverse variance weighted (multiplicative random effects)"] <- "All - Inverse variance weighted"
                   p1 <- mr_scatter_plot(res, dat)
-                  a1 <- p1[[1]] + ggsci::scale_color_lancet()
+                  a1 <- p1[[1]] + ggsci::scale_color_lancet()+my_theme
                   p2 <- mr_forest_plot(res_single)
-                  a2 <- p2[[1]] + ggsci::scale_color_lancet()
+                  a2 <- p2[[1]] + ggsci::scale_color_lancet()+my_theme
                   res_loo <- mr_leaveoneout(dat, method = mr_ivw_mre)
                   p3 <- mr_leaveoneout_plot(res_loo)
-                  a3 <- p3[[1]] + ggsci::scale_color_lancet()
+                  a3 <- p3[[1]] + ggsci::scale_color_lancet()+my_theme
                   p4 <- mr_funnel_plot(res_single)
-                  a4 <- p4[[1]] + ggsci::scale_color_lancet()
+                  a4 <- p4[[1]] + ggsci::scale_color_lancet()+my_theme
+
+
                   folder_name <- paste0(strings1, "_to_", strings2)
                   dir.create(folder_name)
                   ggsave(a1, file = paste0(folder_name, "/scatter_plot.pdf"), width = 7, height = 7)
